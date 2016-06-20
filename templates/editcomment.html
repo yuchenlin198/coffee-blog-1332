@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Edit Comment
+    </title>
+    {% include 'header_navbar1.html' %}
+  </head>
+  <body>
+    {% include 'header_navbar1.html' %}
+    <div class="container new-ed-post">
+      <div class="row">
+        <form method="post">
+          <div class="col-xs-12 col-sm-12 col-md-12">
+            <h3>Share your comments.
+            </h3>
+          </div> 
+          <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="error new-ed-error">{{error}}
+            </div>
+          </div> 
+          <div class="col-xs-12 col-sm-12 col-md-12">
+            <textarea class="new-ed-content" name="content" placeholder="Start writing now...">{{comments.content}}
+            </textarea>
+          </div> 
+          <button type="submit" class="new-ed-button">Update
+          </button>
+        </form>
+        <div class="lo-si-option">
+          <a href="/{{comments.parent_post_id}}" class="lo-si-already">Cancel your edits
+          </a>
+        </div>
+      </div>
+    </div>
+    {% include 'footer.html' %}
+  </body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Coffee Blog Authors
+    </title>
+    {% include 'header_navbar1.html' %}
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4 col-md-push-8">
+          <div class="category-box-wrap">
+            <div class="aut_grav_l">
+              <img class="gravatar-pic_l" src="{{gravatar_url_l}}" alt="gravatar">
+            </div>
+            <h2 class="aut_page">{{user_aut.username}}
+            </h2>
+            {% set dt = user_aut.created_at.strftime('%b, %Y') %}
+            <h4 class="aut_page">
+              <span class="gray-text">Since
+              </span> 
+              <span class="green-text">{{dt}}
+              </span>
+            </h4>
+            <hr>
+            <div class="aut-side-comment">
+              <h4> Some Comments by {{user_aut.username}}
+              </h4>
+              {% for j in comments %}
+              <div class="side-gravatar aut-comm-grav">
+                <img class="side-gravatar-pic" src="{{j.author_grav}}" alt="gravatar">
+              </div>
+              <div class="side-post-box aut-comm-box">
+                {% if j.is_child_comment %}
+                <div class="green-text">
+                  <i class="fa fa-share" aria-hidden="true">
+                  </i> {{j.par_comm_author}}
+                </div>
+                {% endif %}
+                {% set content_short = j.content[:100] + (j.content[:100] and '...') %}
+                {% set dt = j.created_at.strftime('%b, %d, %Y') %}
+                <p class="most-sth-post gray-text">{{dt}}
+                </p>
+                <p>
+                  <a href = "/{{j.key.id()}}" class="most-sth-post gray-text">{{content_short}}
+                  </a>
+                </p>
+              </div>
+              {% endfor %}
+            </div>
+          </div> 
+          <!-- close category-box-wrap--> 
+        </div>
+        <div class="col-md-8 col-md-pull-4">
+          <div id="category-wrap-anchor">
+          </div>
+          {% for i in blogpost %}
+          <article class="row">
+            <div class="col-md-11 blog-post">
+              {% set dt = i.created_at.strftime('%b, %d, %Y') %}
+              <div class="gravatar">
+                <img class="gravatar-pic" src="{{gravatar_url_s}}" alt="gravatar">
+              </div>
+              <div class="author-and-time">
+                <div class="blogpost-author"> 
+                  <span class="gray-text"> by 
+                  </span> 
+                  <a href="/authors/{{i.author}}">
+                    <span class="author-name green-text">{{i.author}}
+                    </span>
+                  </a>
+                </div>
+                <div class="blogpost-posttime gray-text">{{dt}}
+                </div>
+              </div>
+              <div class="blogpost-catcity">
+                <a href="/category/{{i.category}}/all/latest" class="green-text" >{{i.category}} |
+                </a>
+                <a href="/city/{{i.city}}/latest" class="gray-text">{{i.city}}
+                </a>
+              </div>  
+              {% if i.cover_img %}
+              <div class="front-image-holder">
+                <img class="front-image" src="/img?img_id={{i.key.urlsafe()}}" alt="blog post cover picture">
+              </div>
+              {% endif %}
+              <div class="blogpost-title">{{i.subject}}
+              </div>
+              {% set content_short = i.content[:200] + (i.content[:200] and '...') %} 
+              <div class="blogpost-body">{{content_short}}
+              </div>
+              <div class="read-more">
+                <a href = "/{{i.key.id()}}">
+                  <span class=" green-text"> read more..
+                  </span>
+                </a>
+              </div>
+              {% if error_post_id == i.key.id() %}
+              <div class="error front-error">{{error_like}}
+              </div> 
+              {% endif %}
+              <div class="like-comment-icon"> 
+                <form method="post">
+                  <input type = "hidden" name = "post_id" value = "{{i.key.id()}}">
+                  <input type = "hidden" name = "blog_post_created_at" value = "{{i.created_at}}">
+                  <input type = "hidden" name = "post_author" value = "{{i.author}}">
+                  <button type="submit" class="hvr-icon-fade-like-s like-icon gray-text">
+                    {{i.like_count}}
+                  </button>
+                </form>
+                <a href="/{{i.key.id()}}">
+                  <span class="hvr-icon-fade-comment comment-icon gray-text">
+                    {{i.comment_count}}
+                  </span>
+                </a>
+              </div>
+            </div>
+          </article>
+          {% endfor %}
+        </div>
+      </div> 
+      <!-- close row big-->
+    </div> 
+    <!-- close container-->
+    {% include 'footer.html' %}
+  </body>
+</html> 
+

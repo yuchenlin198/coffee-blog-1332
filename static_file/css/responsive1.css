@@ -1,0 +1,188 @@
+@media only screen and (max-width: 425px) {
+  .lo-si-box input, textarea {
+    width: 100%;
+  }
+
+  .lo-si-button {
+    width:100%;
+  }
+
+  .lo-si-box {
+    border:none;
+  }
+
+  .error {
+    width: 100%;
+  }
+
+  .lo-si-box {
+    border: none;
+    background-color: #f9f9f9;
+  }
+
+  .social-share {
+  display: block;
+  }
+
+  .front-image-holder {
+    height: 180px;
+}
+
+  .blogpost-catcity a{
+    display: flex;
+  }
+
+}
+
+@media only screen and (min-width: 425px) and (max-width: 767px) {
+  .new-ed-post textarea {
+    width: 100%;
+  }
+
+  .new-ed-post h3 {
+    width: 100%;
+  }
+
+  .new-ed-error {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 500px) {
+
+  .header-slogan {
+    display:none;
+  }
+
+  .collapse, 
+  .navbar-collapse a {
+    font-size:14px;
+  }
+
+  .new-ed-post {
+  width: 95%;
+  }
+
+}
+
+@media only screen and (max-width: 610px) {
+  .read-more {
+    margin-top: 10px;
+  }
+    /* center header for devices smaller than 500px */
+
+  .size-extra-small {
+    max-width: 100%;
+    width: 100%;
+  }
+  
+  .blog-ex-small {
+    margin-left:auto;
+    margin-right:auto;
+  }
+
+  .comment-aut-info,
+  .pp-reply-to {
+    display: inline-flex;
+  }
+
+  .comment-aut-info {
+    margin-right: 10px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .pp-comment textarea {
+    width: 90%;
+  }
+
+  .reply textarea {
+    width: 100%;
+  }
+
+  .pp-submit input {
+    margin-right: 20px;
+  }
+
+  .blog-post {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .new-ed-post input {
+    width: 100%;
+    margin-right: 0%;
+  }
+
+  .navbar-nav {
+    float: left;
+  }
+
+  .write-button-2 {
+    display: none;
+  }
+
+  .navbar-default {
+    border: none;
+  }
+}
+
+/* re-position social icon at 768px */
+
+@media only screen and (min-width: 768px) {
+  .write-button {
+    display: none;
+  }
+
+  .header-register,
+  .header-signin {
+    padding-top:0px;
+  }
+
+
+  .navbar-nav {
+    margin-right:130px;
+  }
+
+  .lo-si-forgot {
+    margin-left: 50px;
+  }
+
+  .select-category {
+    width: 80%;
+    margin-left: 10%;
+
+  }
+}
+
+@media (min-width: 992px) {
+  .aut-post-large {
+   margin-left: 20px;
+  }
+  
+  .cat-table {
+    display: none;
+  }
+}
+
+@media (max-width: 991px) {
+  #category-wrap.cat-no-scroll {
+    position: relative;
+    right: 0px;
+  }
+
+  .aut-side-comment {
+    display: none;
+  }
+
+  .side-cat-table {
+    display: none;
+  }
+
+  .category-box-wrap {
+    width: 100%;
+  }
+
+}
+

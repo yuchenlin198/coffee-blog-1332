@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Coffee Blog Post Page
+    </title>
+    <meta property="og:url"           content="http://coffee-blog-1332.appspot.com/{{blogpost.key.id()}}"  />
+    <meta property="og:type"          content="website" />
+    <meta property="og:title"         content="Coffee Blog" />
+    <meta property="og:description"   content="A place to share coffee love" />
+    <meta property="og:image"         content="http://coffee-blog-1332.appspot.com/static_file/images/coffee-image.jpg" />
+  </head>
+  <body>
+    <div id="fb-root">
+    </div>
+    <script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.6&appId=159837864411067";
+        fjs.parentNode.insertBefore(js, fjs);
+      }
+             (document, 'script', 'facebook-jssdk'));
+    </script>
+    <script>window.twttr = (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0],
+            t = window.twttr || {
+            };
+        if (d.getElementById(id)) return t;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "https://platform.twitter.com/widgets.js";
+        fjs.parentNode.insertBefore(js, fjs);
+        t._e = [];
+        t.ready = function(f) {
+          t._e.push(f);
+        };
+        return t;
+      }
+                            (document, "script", "twitter-wjs"));
+    </script>
+    {% include 'header_navbar1.html' %}
+    <div class="container post-page">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+          <div class="error">{{error_auth}}
+          </div>
+          <h1>{{blogpost.subject}}
+          </h1>
+          {% set dt = blogpost.created_at.strftime('%b, %d, %Y') %} 
+          <div class="post-page-info">
+            <span class="blogpost-posttime">{{dt}}
+            </span>
+            <span class="green-text">|  by 
+              <span class="author-name"> {{blogpost.author}}
+              </span>
+            </span>
+            <span class="green-text">| in 
+              <span class="post-page-category"> {{blogpost.category}} 
+              </span>
+            </span>
+          </div> 
+          {% if blogpost.cover_img %}
+          <div class="pp-image-holder">
+            <img class="pp-image" src="/img?img_id={{blogpost.key.urlsafe()}}" alt="post cover image">
+          </div>
+          {% endif %}
+          <div class="post-page-body">{{blogpost.content}}
+          </div>
+          <div class="pp-like-comment-icon" id="write-comment"> 
+            <a href="/edit/{{blogpost.key.id()}}" class="btn edit-button">Edit
+            </a>
+            <a href="/delete/{{blogpost.key.id()}}" class="btn edit-button">Delete
+            </a>
+            <form method="post">
+              <input type = "hidden" name = "post_id" value = "{{blogpost.key.id()}}">
+              <input type = "hidden" name = "post_author" value = "{{blogpost.author}}">
+              <input type = "hidden" name = "blog_post_created_at" value = "{{blogpost.created_at}}">
+              <input type = "hidden" name = "like_yes" value = "first">
+              <button type="submit" class="hvr-icon-fade-like btn edit-button pp-like-click">
+              </button>
+            </form>
+            <span class="pp-like-count"> ({{blogpost.like_count}}) 
+            </span> 
+            <p class="social-share">
+              <span class="fb-share-button" 
+                    data-href="http://coffee-blog-1332.appspot.com/{{blogpost.key.id()}}" 
+                    data-layout="button">
+              </span>  
+              <a class="twitter-share-button"
+                 href="https://twitter.com/intent/tweet?text={{blogpost.subject}} | {{blogpost.author}} | CoffeeBlog ">
+                Tweet
+              </a>
+            </p>
+          </div>
+          <div class="error">{{error_like}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="container">
+      <div class="row">
+        <form method="post">
+          <div class="error">{{error_comment}}
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-12 pp-comment">
+            <textarea name="comment_content" placeholder="Comment here...">
+            </textarea>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-12 pp-submit">
+            <input type="submit" name="comment_button">
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="container">
+      <h3>Responses ({{blogpost.comment_count}})
+      </h3>
+      {% for i in comments %}
+      {% set blogpsot_id = i.key.id() %} 
+      {% set dt = i.created_at.strftime('%b, %d') %} 
+      <div class="row pp-comment-sec">
+        <div class="size-extra-small col-xs-3 col-sm-3 col-md-3 green-text">
+          <div class="comment-aut-info">
+            <div class="comment-gravatar">
+              <img class="comment-gravatar-pic" src="{{i.author_grav}}" alt="gravatar">
+            </div>
+            <div class="comment-aut-date">
+              <p class="comment-author green-text">{{i.author}}
+              </p>
+              <p class="comment-date gray-text">{{dt}}
+              </p>
+            </div>
+          </div>
+          {% if i.is_child_comment %}
+          <div class="pp-reply-to">
+            <i class="fa fa-share fa-lg" aria-hidden="true">
+            </i>
+            <img class="comment-gravatar-pic" src="{{i.par_author_grav}}" alt="gravatar">
+            <span class="reply-to-aut">{{i.par_comm_author}}
+            </span>
+            <span class="comment-gravatar">
+            </span>
+          </div>
+          {% endif %} 
+          <br>  
+        </div>
+        <div class="size-extra-small col-xs-9 col-sm-9 col-md-9 comment-content">{{i.content}}
+        </div>
+        <div class="size-extra-small col-xs-9 col-sm-9 col-md-9 comment-buttom-set">
+          <a class="fa fa-reply reply pp-reply-buttom" aria-hidden="true">
+          </a>
+          <a href="/editcomment/{{i.key.id()}}" class="fa fa-pencil-square-o reply" aria-hidden="true">
+          </a>
+          <a href="/deletecomment/{{i.key.id()}}" class="fa fa-trash reply" aria-hidden="true">
+          </a>
+        </div>
+        <div class="pp-reply-form">
+          <form method="post">
+            <div class="size-extra-small col-xs-12 col-sm-9 col-md-9 pp-comment pp-reply">
+              <textarea name="reply_content" placeholder="reply here..">
+              </textarea>
+            </div>
+            <div class="size-extra-small col-xs-12 col-sm-9 col-md-9 pp-submit pp-reply">
+              <input type = "hidden" name = "parent_comment_id" value = "{{i.key.id()}}">
+              <input type = "hidden" name = "par_comm_author" value = "{{i.author}}">
+              <input type = "hidden" name = "par_comm_author_id" value = "{{i.author_id}}">
+              <input type="submit" name="reply_button">
+            </div>
+          </form>
+        </div>   
+      </div>
+      {% endfor %}
+    </div>
+    {% include 'footer.html' %}
+    <script type="text/javascript" src="js/jquery-1.10.2.min.js">
+    </script>  
+    <script>
+      $(document).ready(function() {
+        $('.pp-reply-buttom').click(function(){
+          $(this).parents().next().slideToggle(100);
+        })
+      });
+    </script>
+  </body>
+</html> 
+
+

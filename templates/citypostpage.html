@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Coffee Blog City
+    </title>
+    {% include 'header_navbar1.html' %}
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8">
+          <div id="category-wrap-anchor">
+          </div>
+          <table class="cat-table">
+            <tr>
+              <td class="cp-category gray-text">city
+              </td>
+            </tr>
+            <tr>
+              <td class="cp-category-title">{{city}}
+              </td>
+            </tr>
+          </table>
+          {% if blog_n == 0 %}
+          <article class="row">
+            <div class="col-md-11 blog-post">
+              <div class="gravatar">
+                <img class="gravatar-pic" src="/static_file/images/logo_blog.png" alt="gravatar">
+              </div>
+              <div class="author-and-time">
+                <div class="blogpost-author"> 
+                  <span class="gray-text"> by 
+                  </span> 
+                  <span class="author-name green-text">CoffeeBlog
+                  </span>
+                </div> 
+                <div class="blogpost-posttime gray-text">Now
+                </div>
+              </div>
+              <div class="blogpost-catcity">
+                <a class="gray-text">{{city}}
+                </a>
+              </div>  
+              <div class="front-image-holder">
+                <img class="front-image" src="/static_file/images/coffee-image.jpg" alt="blog post cover picture">
+              </div>
+              <div class="blogpost-title">Be the 
+                <span class="blogpost-title green-text">first
+                </span> to write here.
+              </div>
+              <div class="blogpost-body">Coffee blog is a unique place to share anything about coffee. 
+              </div>
+              <div class="read-more">
+                <span class=" green-text"> read more..
+                </span>
+              </div>
+            </div>
+          </article>
+          {% else %}
+          {% for i in blogpost %}
+          <article class="row">
+            <div class="col-md-11 blog-post">
+              {% set dt = i.created_at.strftime('%b, %d, %Y') %}
+              <div class="gravatar">
+                <img class="gravatar-pic" src="{{i.author_grav}}" alt="gravatar">
+              </div>
+              <div class="author-and-time">
+                <div class="blogpost-author"> 
+                  <span class="gray-text"> by 
+                  </span> 
+                  <a href="/authors/{{i.author}}">
+                    <span class="author-name green-text">{{i.author}}
+                    </span>
+                  </a> 
+                </div>
+                <div class="blogpost-posttime gray-text">{{dt}}
+                </div>
+              </div>
+              <div class="blogpost-catcity">
+                <a href="/category/{{i.category}}/all/latest" class="green-text" >{{i.category}} |
+                </a>
+                <a href="/city/{{i.city}}/latest" class="gray-text">{{i.city}}
+                </a>
+              </div>  
+              {% if i.cover_img %}
+              <div class="front-image-holder">
+                <img class="front-image" src="/img?img_id={{i.key.urlsafe()}}" alt="blog post cover picture">
+              </div>
+              {% endif %}
+              <div class="blogpost-title">{{i.subject}}
+              </div>
+              {% set content_short = i.content[:200] + (i.content[:200] and '...') %} 
+              <div class="blogpost-body">{{content_short}}
+              </div>
+              <div class="read-more">
+                <a href = "/{{i.key.id()}}">
+                  <span class=" green-text"> read more..
+                  </span>
+                </a>
+              </div>
+              {% if error_post_id == i.key.id() %}
+              <div class="error front-error">{{error_like}}
+              </div> 
+              {% endif %}
+              <div class="like-comment-icon"> 
+                <form method="post">
+                  <input type = "hidden" name = "post_id" value = "{{i.key.id()}}">
+                  <input type = "hidden" name = "blog_post_created_at" value = "{{i.created_at}}">
+                  <input type = "hidden" name = "post_author" value = "{{i.author}}">
+                  <button type="submit" class="hvr-icon-fade-like-s like-icon gray-text">
+                    {{i.like_count}}
+                  </button>
+                </form>
+                <a href="/{{i.key.id()}}">
+                  <span class="hvr-icon-fade-comment comment-icon gray-text">
+                    {{i.comment_count}}
+                  </span>
+                </a>
+              </div>
+            </div>
+          </article>
+          {% endfor %}
+          {% endif %}
+        </div>
+        <div class="col-md-4" id="category-wrap">
+          <div class="category-box-wrap cp-category-box-wrap">
+            <table class="side-cat-table">
+              <tr>
+                <td class="cp-category gray-text">city
+                </td>
+              </tr>
+              <tr>
+                <td class="cp-category-title">{{city}}
+                </td>
+              </tr>
+            </table>
+            <hr>
+            <h4> Rank the posts by 
+            </h4>
+            <div class="category-box">
+              <a href="/city/{{city}}/latest">
+                <span class="rank-span">Latest
+                </span>
+              </a>
+              <a href="/city/{{city}}/likes">
+                <span class="rank-span">Likes
+                </span>
+              </a>
+              <a href="/city/{{city}}/comments">
+                <span class="rank-span">Comments
+                </span>
+              </a>
+              <a href="/city/{{city}}/saves">
+                <span class="rank-span">Saves
+                </span>
+              </a>
+            </div>
+            <hr>
+            <h4> Posts of popular categories in {{city}} 
+            </h4>
+            <div class="category-box">
+              <a href="/category/Events/{{city}}/latest">
+                <span class="category-span">Events
+                </span>
+              </a>
+              <a href="/category/Shops/{{city}}/latest">
+                <span class="category-span">Shops
+                </span>
+              </a>
+              <a href="/category/People/{{city}}/latest">
+                <span class="category-span">People
+                </span>
+              </a>
+              <a href="/category/Story/{{city}}/latest">
+                <span class="category-span">Story
+                </span>
+              </a>
+              <a href="/category/Education/{{city}}/latest">
+                <span class="category-span">Education
+                </span>
+              </a>            
+            </div> 
+          </div> 
+          <!-- close category-box-wrap--> 
+        </div>
+      </div> 
+      <!-- close row big-->
+    </div> 
+    <!-- close container-->
+    {% include 'footer.html' %}
+    <script>
+      function cat_sticky_relocate() {
+        var window_top = $(window).scrollTop();
+        var div_top = $('#category-wrap-anchor').offset().top;
+        if (window_top > div_top) {
+          $('#category-wrap').addClass('cat-no-scroll');
+          $('#navbar1').addClass('nav-no-scroll');
+        }
+        else {
+          $('#category-wrap').removeClass('cat-no-scroll');
+          $('#navbar1').removeClass('nav-no-scroll');
+        }
+      }
+      $(function () {
+        $(window).scroll(cat_sticky_relocate);
+        sticky_relocate();
+      }
+       );
+    </script>
+  </body>
+</html> 
+
+

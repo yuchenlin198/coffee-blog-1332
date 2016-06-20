@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Edit Post
+    </title>
+    {% include 'header_navbar1.html' %}
+  </head>
+  <body>
+    <div class="container new-ed-post">
+      <div class="row">
+        <form enctype="multipart/form-data" method="post">
+          <div class="col-xs-12 col-sm-12 col-md-12">
+            <h3>Share your comments with the coffee world
+            </h3>
+          </div> 
+          <div class="col-xs-12 col-sm-12 col-md-12">
+            <textarea class="new-ed-subject" name="subject" placeholder="Give your post a title...">{{subject}}
+            </textarea>
+          </div> 
+          <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="error new-ed-error">{{error}}
+            </div>
+          </div> 
+          <div class="col-xs-12 col-sm-12 col-md-12">
+            <textarea class="new-ed-content" name="content" placeholder="Start writing now...">{{content}}
+            </textarea>
+          </div> 
+          <div class="col-xs-12 col-sm-12 col-md-12">
+            <span class="gray-text edit-select-cover">Choose a new cover image (optional)
+            </span>
+            <input type="file" name="cover_img" class=“file-upload“>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-12 select-category">
+            <div class="form-group">
+              <select name="category" class="form-control">
+                {% if category %}
+                <option value="{{category}}" selected>{{category}} --- What is your post about?
+                </option>
+                {% else %}
+                <option value="" disabled>What is your post about? Choose one.
+                </option>
+                {% endif %}
+                <option value="Events">Events
+                </option>
+                <option value="Shops">Shops
+                </option>
+                <option value="People">People
+                </option>
+                <option value="Story">Story
+                </option>
+                <option value="Education">Education
+                </option>
+                <option value="Others">Others
+                </option>
+              </select>
+            </div>
+            <div class="form-group">
+              <select name="city" class="form-control">
+                {% if city %}
+                <option value="{{city}}" selected>{{city}} --- Is your post relavent to a city below?  
+                </option>
+                {% else %}
+                <option value="" disabled selected>Is your post relavent to any of the following cities?
+                </option>
+                {% endif %}
+                <option value="BayArea">Bay Area
+                </option>
+                <option value="LosAngeles">Los Angeles
+                </option>
+                <option value="Chicago">Chicago
+                </option>
+                <option value="NewYorkCity">New York City
+                </option>
+                <option value="Philadelphia">Philadelphia
+                </option>
+                <option value="Seattle">Seattle
+                </option>
+                <option value="Dallas">Dallas
+                </option>
+                <option value="Austin">Austin
+                </option>
+                <option value="Others">Others
+                </option>
+              </select>
+            </div>
+          </div>
+          <button type="submit" class="new-ed-button">Update
+          </button>
+        </form>
+        <div class="lo-si-option">
+          <a href="/{{post_id}}" class="lo-si-already">Cancel your edits
+          </a>
+        </div>
+      </div>
+    </div>
+    {% include 'footer.html' %}
+  </body>
+</html>
+

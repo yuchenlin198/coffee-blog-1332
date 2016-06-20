@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Basic Page Needs-->
+    <meta charset="utf-8">
+    <title>Coffee Blog
+    </title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Mobile Specific Metas-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- link google font -->
+    <link href='https://fonts.googleapis.com/css?family=Lato:700,300,400' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Alegreya:400,700,900italic,700italic,400italic,900' rel='stylesheet' type='text/css'>
+    <!-- link normalize -->
+    <link rel="stylesheet" type="text/css" href="/static_file/css/normalize.css">
+    <!-- link bootstrap -->
+    <link rel="stylesheet" type="text/css" href="/static_file/css/bootstrap.css">
+    <!-- link font-awesome icons -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <!-- link hover.css: a collection of CSS3 powered hover effects-->
+    <link rel="stylesheet" type="text/css" href="/static_file/css/hover_selected.css">
+    <!-- link my custom css-->
+    <link rel="stylesheet" type="text/css" href="/static_file/css/main1.css">
+    <!-- link my responsive design css-->
+    <link rel="stylesheet" type="text/css" href="/static_file/css/responsive1.css">
+  </head>
+  <body>
+    <!-- Container for bootstrap framework!-->
+    <div class="container-fluid">
+      <!-- header section-->
+      <header class="row headerfront">
+        <div class="col-xs-6 col-md-7">
+          <a href="/">
+            <span class="logo-text"> Coffee
+            </span> 
+            <span class="logo_text_2">Blog
+            </span>
+          </a>
+        </div>
+        <div class="col-xs-6 col-md-5 text-right header-text">
+          <a href="/signup">
+            <span class="header-register">Register   /
+            </span>
+          </a>
+          {% if user_id %}
+          <a href="/logout">
+            <span class="header-signin">Log Out
+            </span>
+          </a>
+          {% else %} 
+          <a href="/login">
+            <span class="header-signin">Sign In
+            </span>
+          </a>
+          {% endif %}
+        </div>
+      </header>
+    </div> 
+    <!-- close container-fluid -->
+    <!-- navbar section-->
+    <div id="category-wrap-anchor">
+    </div>
+    <nav class="navbar navbar-default" id="navbar1">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            <span class="icon-bar">
+            </span>
+            <span class="icon-bar">
+            </span>
+            <span class="icon-bar">
+            </span> 
+          </button>
+          <a href="/newpost" class="btn btn-success write-button">Write Your Post
+          </a>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+          <ul class="nav navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="#">Latest
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/category/Events/all/latest">Events
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/category/Shops/all/latest">Shops
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/category/People/all/latest">People
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/category/Story/all/latest">Story
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/category/Education/all/latest">Education
+              </a>
+            </li>
+            <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                Cities
+                <span class="caret">
+                </span>
+              </a>
+              <ul class="dropdown-menu">
+                <li class="dropdown-item">
+                  <a class="drop-a"
+                     href="/city/BayArea/latest">
+                    Bay Area
+                  </a>
+                </li>
+                <li class="dropdown-item">
+                  <a class="drop-a" 
+                     href="/city/LosAngeles/latest">
+                    Los Angeles
+                  </a>
+                </li>
+                <li class="dropdown-item">
+                  <a class="drop-a" 
+                     href="/city/Chicago/latest">
+                    Chicago
+                  </a>
+                </li> 
+                <li class="dropdown-item">
+                  <a class="drop-a" 
+                     href="/city/Philadelphia/latest">
+                    Philadelphia
+                  </a>
+                </li> 
+                <li class="dropdown-item">
+                  <a class="drop-a" 
+                     href="/city/NewYorkCity/latest">
+                    New York City
+                  </a>
+                </li> 
+                <li class="dropdown-item">
+                  <a class="drop-a" 
+                     href="/city/Seattle/latest">
+                    Seattle
+                  </a>
+                </li> 
+                <li class="dropdown-item">
+                  <a class="drop-a" 
+                     href="/city/Dallas/latest">
+                    Dallas
+                  </a>
+                </li> 
+                <li class="dropdown-item">
+                  <a class="drop-a" 
+                     href="/city/Austin/latest">
+                    Austin
+                  </a>
+                </li> 
+                <li class="divider">
+                </li>
+                <li class="dropdown-item">
+                  <a href="/city/Others/latest">Others
+                  </a>
+                </li>
+              </ul>
+            </li>  
+          </ul>
+          <a href="/newpost" class="btn btn-success write-button-2">Write Your Post
+          </a>
+        </div>
+      </div>
+    </nav>
+    <!-- link javascrpts files-->
+    <script src="/static_file/js/jquery-1.10.2.min.js">
+    </script>  
+    <script src="/static_file/js/bootstrap.min.js">
+    </script>
+    <script src="/static_file/js/pace.min.js">
+    </script> 
+  </body>
+</html> 

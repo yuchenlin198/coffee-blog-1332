@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Coffee Blog Frontpage
+    </title>
+    {% include 'header_navbar1.html' %}
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8">
+          <div id="category-wrap-anchor">
+          </div>
+          <div class="error">
+            {{error_auth}}
+          </div>{% for i in blogpost %}
+          <article class="row">
+            <div class="col-md-11 blog-post">
+              {% set dt = i.created_at.strftime('%b, %d, %Y') %}
+              <div class="gravatar">
+                <img class="gravatar-pic" src="{{i.author_grav}}" alt="gravatar">
+              </div>
+              <div class="author-and-time">
+                <div class="blogpost-author">
+                  <span class="gray-text">by 
+                    <span>
+                      <a href=
+                         "/authors/{{i.author}}">
+                        <span class=
+                              "author-name green-text">{{i.author}}
+                        </span>
+                      </a>
+                    </span>
+                  </span>
+                </div>
+                <div class="blogpost-posttime gray-text">
+                  {{dt}}
+                </div>
+              </div>
+              <div class="blogpost-catcity">
+                <a class="green-text" href=
+                   "/category/{{i.category}}/all/latest">{{i.category}} |
+                </a>
+                <a class="gray-text" href=
+                   "/city/{{i.city}}/latest">{{i.city}}
+                </a>
+              </div>
+              {% if i.cover_img %}
+              <div class="front-image-holder">
+                <img class="front-image" src="/img?img_id={{i.key.urlsafe()}}" alt="blog post cover picture">
+              </div>
+              {% endif %}
+              <div class="blogpost-title">
+                {{i.subject}}
+              </div>
+              {% set content_short = i.content[:200] + (i.content[:200] and '...') %} 
+              <div class="blogpost-body">{{content_short}}
+              </div>
+              <div class="read-more">
+                <a href="/{{i.key.id()}}">
+                  <span class=" green-text">read
+                    more..
+                  </span>
+                </a>
+              </div>{% if error_post_id == i.key.id() %}
+              <div class="error front-error">
+                {{error_like}}
+              </div>{% endif %}
+              <div class="like-comment-icon">
+                <form method="post">
+                  <input name="post_id" type="hidden" value="{{i.key.id()}}">
+                  <input name="blog_post_created_at" type="hidden" value=
+                         "{{i.created_at}}"> 
+                  <input name="post_author" type="hidden"
+                         value="{{i.author}}"> 
+                  <button class=
+                          "hvr-icon-fade-like-s comment-icon gray-text" type=
+                          "submit">{{i.like_count}}
+                  </button>
+                </form>
+                <a href="{{i.key.id()}}">
+                  <span class=
+                        "hvr-icon-fade-comment comment-icon gray-text">{{i.comment_count}}
+                  </span>
+                </a>
+              </div>
+            </div>
+          </article>
+          {% endfor %}
+        </div>
+        <div class="col-md-4" id="category-wrap">
+          <div class="category-box-wrap">
+            <p class="cat-side-title gray-text">In the past week
+            </p>
+            <hr>
+            <h4>Most-liked Posts
+            </h4>
+            {% for j in mostliked | sort(attribute="like_count", reverse=True) %}
+            {% if loop.index <=1 %}
+            <div class="side-gravatar">
+              <img class="side-gravatar-pic" src="{{j.author_grav}}" alt="gravatar">
+            </div>
+            <div class="side-post-box">
+              <p>
+                <a class="most-sth-post gray-text" href=
+                   "/{{j.key.id()}}">{{j.subject}}
+                </a>
+              </p>
+              <p>
+                <a class="green-text" href="/authors/{{j.author}}">{{j.author}}
+                  <p>
+                  </p>
+                </a>
+              </p>
+            </div>
+            {% endif %} 
+            {% endfor %}
+            <hr>
+            <h4>Most-discussed Posts
+            </h4>
+            {% for k in mostcomment | sort(attribute="comment_count", reverse=True) %}
+            {% if loop.index <=1 %}
+            <div class="side-gravatar">
+              <img class="side-gravatar-pic" src="{{k.author_grav}}" alt="gravatar">
+            </div>
+            <div class="side-post-box">
+              <p>
+                <a class="most-sth-post gray-text" href=
+                   "/{{k.key.id()}}">{{k.subject}}
+                </a>
+              </p>
+              <p>
+                <a class="green-text" href="/authors/{{k.author}}">{{k.author}}
+                  <p>
+                  </p>
+                </a>
+              </p>
+            </div>
+            {% endif %}
+            {% endfor %}
+            <hr>
+            <h4>Explore Coffee Cities
+            </h4>
+            <div class="category-box">
+              <a href="/city/BayArea/latest">
+                <span class="category-span">Bay
+                  Area
+                </span>
+              </a> 
+              <a href="/city/LosAngeles/latest">
+                <span class=
+                      "category-span">Los Angeles
+                </span>
+              </a> 
+              <a href=
+                 "/city/Chicago/latest">
+                <span class=
+                      "category-span">Chicago
+                </span>
+              </a> 
+              <a href=
+                 "/city/Philadelphia/latest">
+                <span class=
+                      "category-span">Philadelphia
+                </span>
+              </a> 
+              <a href=
+                 "/city/NewYorkCity/latest">
+                <span class="category-span">New York
+                  City
+                </span>
+              </a> 
+              <a href="/city/Seattle/latest">
+                <span class=
+                      "category-span">Seattle
+                </span>
+              </a> 
+              <a href=
+                 "/city/Dallas/latest">
+                <span class="category-span">Dallas
+                </span>
+              </a>
+              <a href="/city/Austin/latest">
+                <span class=
+                      "category-span">Austin
+                </span>
+              </a> 
+              <a href=
+                 "/city/Others/latest">
+                <span class="category-span">Others
+                </span>
+              </a>
+            </div>
+          </div>
+          <!-- close category-box-wrap-->
+        </div>
+      </div>
+      <!-- close row big-->
+    </div>
+    <!-- close container-->
+    {% include 'footer.html' %} 
+    <script>
+      function cat_sticky_relocate() {
+        var window_top = $(window).scrollTop();
+        var div_top = $('#category-wrap-anchor').offset().top;
+        if (window_top > div_top) {
+          $('#category-wrap').addClass('cat-no-scroll');
+          $('#navbar1').addClass('nav-no-scroll');
+        }
+        else {
+          $('#category-wrap').removeClass('cat-no-scroll');
+          $('#navbar1').removeClass('nav-no-scroll');
+        }
+      }
+      $(function () {
+        $(window).scroll(cat_sticky_relocate);
+        sticky_relocate();
+      }
+       );
+    </script>
+  </body>
+</html>
+
+
+
+

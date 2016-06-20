@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Sign Up
+    </title>
+    {% include 'header_navbar1.html' %}
+  </head>
+  <body>
+    <div class="container">
+      <div class="lo-si-box">
+        <h1 class="lo-si-logo">Sign Up
+        </h1>
+        <form method="post">
+          <div class="lo-si-field-wrap">
+            <input type="text" name="username" placeholder="Username" value="{{username}}">
+            <div class="error">{{error_username}}
+            </div>
+          </div> 
+          <div class="lo-si-field-wrap">
+            <input type="password" name="password" placeholder="Password" value="">
+            <div class="error">{{error_password}}
+            </div>
+          </div>
+          <div class="lo-si-field-wrap">
+            <input type="password" name="verify" placeholder="Repeat Password" value="">
+            <div class="error">{{error_verify}}
+            </div>
+          </div>
+          <div class="lo-si-field-wrap">
+            <input type="text" name="email" placeholder="Email" value="{{email}}">
+            <div class="error">{{error_email}}
+            </div>
+          </div>
+          <button class="lo-si-button">Sign Up
+          </button>
+        </form>
+        <div class="lo-si-option">
+          <a href="/login" class="lo-si-already">Already have an account?
+          </a>
+        </div>
+      </div>
+    </div> 
+    <!-- close container-->
+  </body>
+</html> 
+
+
+
+

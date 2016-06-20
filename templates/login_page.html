@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Log In
+    </title>
+    {% include 'header_navbar1.html' %}
+  </head>
+  <body>
+    <div class="container">
+      <div class="lo-si-box">
+        <h1 class="lo-si-logo">Log In
+        </h1>
+        <form method="post">
+          <div class="lo-si-field-wrap">
+            <input type="text" name="username" placeholder="Username" value="{{username}}">
+            <div class="error">{{error_username}}
+            </div>
+          </div> 
+          <div class="lo-si-field-wrap">
+            <input type="password" name="password" placeholder="Password" value="">
+            <div class="error">{{error_password}}
+            </div>
+          </div>
+          <button class="lo-si-button">Log In
+          </button>
+        </form>
+        <div class="row lo-si-option">
+          <div class="col-xs-6 col-sm-6 col-md-6">
+            <a href="/signup" class="lo-si-forgot">Create an account!
+            </a>
+          </div>
+          <div class="col-xs-6 col-sm-6 col-md-6">
+            <a href="#" class="lo-si-forgot">Forgot password?
+            </a>
+          </div>
+        </div>
+      </div>
+    </div> 
+    <!-- close container-->
+  </body>
+</html> 
